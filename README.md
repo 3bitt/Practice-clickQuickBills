@@ -11,6 +11,7 @@ How to use:
     - In working directory type <code>pip install Click</code>
   - Run <code>python bills.py --help</code>
   
-Info:
+  
+  Info:
     1. When adding your bills do it in ascending order (2019/01, 2019/02, etc.)
   
