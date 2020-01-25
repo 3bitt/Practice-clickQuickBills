@@ -2,8 +2,8 @@ import re
 import click
 import operator
 
-def calculateMeterConsumption(new_val, old_val):
-    result = format(new_val - old_val, '.3f')
+def calculateResourceConsumption(new_val, old_val):
+    result = float(format(new_val - old_val, '.3f'))
     return result
 
 def calculateMeterFee(meterConsumption, meterType):
@@ -11,14 +11,19 @@ def calculateMeterFee(meterConsumption, meterType):
     gas_factor = 1.71
     electricity_factor = 0.53
     if meterType == 'electricity':
-        return format(meterConsumption * electricity_factor, '.2f')
+        return float(format(meterConsumption * electricity_factor, '.2f'))
     elif meterType == 'water':
-        return format(meterConsumption * water_factor, '.2f')
+        return float(format(meterConsumption * water_factor, '.2f'))
     elif meterType == 'gas':
-        return format(meterConsumption * gas_factor, '.2f')
+        return float(format(meterConsumption * gas_factor, '.2f'))
     else:
         print(click.style(f'Calculating fee amount for {meterType} is not possible!', fg='red'))
         exit(0)
+
+def calculateTotalFee(feeDict):
+    totalFee = format(sum(list(feeDict.values())), '.2f')
+    return float(totalFee)
+
 
 def check_period_format(period_string):
     '''
@@ -34,12 +39,12 @@ def check_period_format(period_string):
 
 
 def calculateBill(masterDict):
-    '''
+    """
         Take last and before-last month meter states and calculate resource consumption.
         Basing on that consumption calculate fee amount for each meter in last month.
         Save values in 2 dictionaries and add them to masterDict[lastMonth].
         Return masterDict.
-    '''
+    """
     consumptionDict = {}
     feeDict = {}
     # Regexp to extract meter type (prefix) from words like 'waterMeterValue' (water)
@@ -57,10 +62,14 @@ def calculateBill(masterDict):
 
         val1 = list(dict(sorted_dict[dictLastItem]['meterStates']).values())[i]
         val2 = list(dict(sorted_dict[dictPenultimateItem]['meterStates']).values())[i]
-        meterConsumption = calculateMeterConsumption(val1, val2)
+        meterConsumption = calculateResourceConsumption(val1, val2)
 
         consumptionDict[itemConsumed.group()] = meterConsumption
-        feeDict[itemConsumed.group()+'FeeAmt'] = calculateMeterFee(float(meterConsumption), itemConsumed.group())
+        feeDict[itemConsumed.group()+'FeeAmt'] = calculateMeterFee(meterConsumption, itemConsumed.group())
+
+
+    # Calculate and append totals to feeDict
+    feeDict['total'] = calculateTotalFee(feeDict)
 
     sorted_dict[dictLastItem]['consumption'] = consumptionDict
     sorted_dict[dictLastItem]['fee'] = feeDict
