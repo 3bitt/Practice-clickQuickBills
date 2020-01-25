@@ -1,4 +1,4 @@
-# clickQuickBills - (v0.1) - WIP
+# clickQuickBills - v0.1 - WIP
 Simple Python Click library CLI program for tracking bills spendings and resources consumption per month (Electricity, Water, Gas).
 
 
