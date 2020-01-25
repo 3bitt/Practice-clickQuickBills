@@ -4,6 +4,7 @@ Simple Python Click library CLI program for tracking bills spendings and resourc
 
 Prerequisite:
   - Click library
+  
 How to use:
   - Clone repo
   - Install Click ( reference: https://click.palletsprojects.com/en/7.x/quickstart/ )
