@@ -17,4 +17,5 @@ How to use:
   Info:
   
     - When adding your bills do it in ascending order (2019/01, 2019/02, etc.)
-    - Consumption and fee calculations happen only for second and above periods (first one with no calculations - becouse there is nothing to calculate against in this case)  
+    - Consumption and fee calculations happen only for second and above bills 
+    (first one is without calculations - becouse there is nothing to calculate against in this case)  
