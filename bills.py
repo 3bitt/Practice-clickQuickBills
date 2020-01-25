@@ -10,18 +10,17 @@ def bills():
 
 @bills.command('show')
 @click.option('--month', '-m', help='Show specific month [YYYY/MM]')
-@click.option('--all', is_flag=True, help='Show all months')
-def show(all, month):
+def show(month):
     """
-    Print meter states, args: --all, -m [YYYY/MM]
+    Print meter states, args: -m, --month [YYYY/MM]
     """
     with open('bills_history.json', 'r') as read:
         loaded_dict = json.load(read)
 
-        if all:
-            print(json.dumps(loaded_dict, sort_keys=True, indent=3))
-        elif month:
+        if month:
             print(json.dumps(loaded_dict[month], indent=3))
+        else :
+            print(json.dumps(loaded_dict, sort_keys=True, indent=3))
     read.close()
 
 
