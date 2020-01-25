@@ -11,5 +11,3 @@ How to use:
     - In working directory type <code>pip install Click</code>
   - <code>python bills.py --help</code>
   
-Examples:
-  - <code>python bills.py new</code> - You will be asked to provide month (YYYY/MM) for which you want to capture data and meter states in this month.  
