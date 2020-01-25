@@ -1,4 +1,4 @@
-# clickQuickBills
+# clickQuickBills (Work in progress)
 Simple Python Click library CLI program for tracking bills spendings and resources consumption (Electricity, Water, Gas).
 
 
